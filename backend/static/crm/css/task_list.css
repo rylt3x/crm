@@ -1,0 +1,123 @@
+.table-header {
+    transition: .3s;
+    font-weight: 600;
+}
+.table-data {
+    background: #ffffff;
+    /*color: #dedede;*/
+    transition: .3s;
+    border-bottom: 1px solid #efefef;
+}
+.table-data:hover, .table-header:hover {
+    /*background: #1f1d29;*/
+}
+.lead-id:hover {
+    color: #4ac1f7;
+}
+
+.mx-table {
+    background: white;
+    padding: 25px 20px 25px;
+    border-radius: 3px;
+    border: 1px lightgray solid;
+    color: #283655;
+}
+.table-section {
+    padding: 30px 30px;
+}
+
+.leads-table {
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#table-leads_wrapper {
+    position: relative;
+}
+
+#table-leads_info {
+    display: inline-block;
+    font-size: .9em;
+}
+
+#table-leads_paginate {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    font-size: .9em;
+}
+#table-leads_length {
+    display: inline-block;
+}
+#table-leads_filter {
+    display: block;
+    margin-top: 20px;
+}
+#table-leads_filter label {
+    font-size: .9em;
+}
+body {
+    background: #f5f5f5;
+}
+.table>:not(:first-child) {
+    border: none;
+}
+.table>:not(caption)>*>*{
+    border: none;
+}
+.list-lead-name {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 150px;
+    text-overflow: ellipsis;
+}
+tbody {
+    font-size: .9em;
+}
+
+.odd-item {
+    background: #f7f7f7;
+}
+input[aria-controls="table-leads"] {
+    margin-left: 10px;
+    outline: none;
+    border: 1px solid lightgrey;
+    padding: 6px;
+    font-size: .8em;
+}
+input[aria-controls="table-leads"]:hover {
+
+}
+thead {
+    border-bottom: 1px solid darkgray;
+}
+th {
+    font-weight: 600;
+}
+.paginate_button {
+    display: inline-flex;
+    justify-content: center;
+    padding-top: 3px;
+    margin: 0 2px;
+    border-radius: 3px;
+    height: 30px;
+    width: 30px;
+    color: white;
+    font-weight: 600;
+    vertical-align: center;
+    background: #5abdff;
+    border: 1px #e5e5e5 solid;
+    cursor: pointer;
+    transition: .2s;
+}
+.paginate_button:hover {
+    background: #1aa2ff;
+    color: white;
+}
+.overdued-task {
+    color: crimson;
+}
+.todo-task {
+    color: #00cd00;
+}
+

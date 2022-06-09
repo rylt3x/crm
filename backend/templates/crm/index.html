@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/main_page.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/header_panel.css' %}">
+    <meta name="viewport" content="width=device-viewport">
+    <title>CRM - Главная</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="{% static 'crm/js/delete_order.js' %}"></script>
+    <script src="{% static 'crm/js/order_follow.js' %}"></script>
+    <script type="text/javascript" src="{% static '/crm/js/send_email.js' %}"></script>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'crm/navigation.html' %}
+    <section class="content">
+    {% include 'crm/header_panel.html' %}
+        <div class="content__inner">
+            <div class="dashboard__wrapper">
+                <div class="dashboard">
+                    <div class="dashboard-header__wrapper">
+                        <div class="dashboard-header">
+                            <h1>Михаил Михеев</h1> <span class="date-and-time">Сегодня {% now 'DATE_FORMAT' %}</span>
+                        </div>
+                    </div>
+                    <section class="head-section">
+
+                        <div id="main-info">
+                            <div class="info-element__wrapper">
+                                <div class="info-element">
+                                    <div class="info-content">
+                                        <span class="info-header">Количество клиентов</span>
+                                        <span class="info-text">{{ clients_count }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-element__wrapper">
+                                <div class="info-element">
+                                    <div class="info-content">
+                                        <span class="info-header">Количество сделок</span>
+                                        <span id="total-leads" class="info-text">{{ leads|length }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-element__wrapper">
+                                <div class="info-element">
+                                    <div class="info-content">
+                                        <span class="info-header">Бюджет сделок</span>
+                                        <span id="total-budget" class="info-text">{{ total_budget }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="create-order-section">
+                        <div class="create-order__inner">
+                            <div id="toggle-order-modal" class="create-order-element">
+                                <a class="create-order-element" href="{% url 'crm:create_order' %}">
+                                    <div class="btn-background">
+                                        <img height="32px" src="{% static 'media/crm/mainpage/create.svg' %}" alt="create-order" class="create-order-btn">
+                                    </div>
+                                    <div class="create-order-text-wrapper">
+                                        <span class="create-order-text">Создать заявку</span>
+                                        <span class="create-order-sub-text">На отдельной странице</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section id="leads">
+                    {% if leads %}
+                        {% for lead in leads %}
+                            <div data-id="{{ lead.id }}" class="lead-card__wrapper">
+                                <div class="lead-card">
+                                    <div class="lead-title-section">
+                                        <div class="title-and-menu__wrapper">
+                                            <div class="title-and-menu">
+                                                <span class="lead-card-header" href="{% url 'crm:update_order' pk=lead.id %}">{{ lead.name }}</span>
+                                                <ul class="lead-menu">
+                                                    <li class="lead-menu-item"><img alt="Меню" class="menu-icon" src="{% static '/media/crm/menu/menu-icon.svg' %}">
+                                                        <ul class="delete-menu">
+                                                            <div class="delete-arrow-left"></div>
+                                                            <li class="delete-menu-item">
+                                                                <div class="delete-menu__inner">
+                                                                    <img class="delete-icon" src="{% static 'media/crm/mainpage/delete.svg' %}"><a href="#">Удалить</a>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="avatar-section">
+                                            <div class="avatar"><span>{{ lead.client.avatar_symbols|default:"NN" }}</span></div>
+                                            <div class="client-contact">
+                                                <span class="client-name">{{ lead.client.client_name}}</span>
+                                                <span class="client-phone">{{ lead.client.pretty_phone }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lead-content">
+                                        <div class="data-section">
+                                            <span class="budget-text">Бюджет сделки</span> <span class="budget-value">{{ lead.budget }}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

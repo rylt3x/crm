@@ -1,0 +1,93 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: sans-serif;
+    margin: 20px;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.wrapper {
+    background: url("/static/registration/background.webp") no-repeat top;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(0deg, rgba(1, 14, 48, 0.8), rgba(1, 37, 76, 0.8));
+}
+
+.login-section {
+    padding: 30px;
+    max-width: 500px;
+    max-height: 50vh;
+    background: white;
+    border-radius: 7px;
+    box-shadow: 5px 5px 25px #474747;
+}
+.login__inner {
+    padding: 25px;
+}
+label {
+    display: none;
+}
+input {
+    display: block;
+    height: 30px;
+    width: 400px;
+    outline: none;
+    border: 1px gainsboro solid;
+    padding: 10px 10px 10px 20px;
+    font-size: 1.2em;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    margin: 0 auto;
+    transition: .3s;
+}
+input:focus {
+    border-bottom: 1px #4ac1f7 solid;
+}
+
+#id_password {
+    border-top: none;
+}
+
+button {
+    display: block;
+    border: none;
+    width: 434px;
+    background: #4272d7;
+    color: white;
+    margin: 40px auto 0;
+    padding: 15px 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: .3s;
+}
+button:hover {
+    cursor: pointer;
+    background: #224898;
+}
+.welcome-text {
+    font-size: 2em;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 50px;
+}

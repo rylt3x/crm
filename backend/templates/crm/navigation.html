@@ -1,0 +1,67 @@
+{% load static %}
+{% include 'crm/modals/send_mail.html' %}
+
+<div class="navigation">
+    <div class="nav__inner">
+        <div class="meta-content">
+            <div class="meta-element">
+                <a href="{% url 'crm:main_page' %}">
+                    <img class="user-avatar" height="70px" width="70px" src="{% static 'media/crm/avatar.jpg' %}">
+                </a>
+            </div>
+        </div>
+        <div class="nav_block">
+            <nav class="navigation_menu">
+                <ul class="menu_panel">
+
+                    <li  class="menu_item {% if request.resolver_match.url_name == 'main_page' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'crm:main_page' %}">
+                            <div class="menu-item__inner">
+                                <img class="navbar-menu-icon {% if request.resolver_match.url_name == 'main_page' %}icon-active{% endif %}" src="{% static 'media/crm/navbar/home.png' %}"><span class="item_text">Главная</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu_item {% if request.resolver_match.url_name == 'order_list' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'crm:order_list' %}">
+                            <div class="menu-item__inner">
+                                <img class="navbar-menu-icon {% if request.resolver_match.url_name == 'order_list' %}icon-active{% endif %}" src="{% static 'media/crm/navbar/orders.png' %}"><span class="item_text">Сделки</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu_item {% if request.resolver_match.url_name == 'task_list' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'crm:task_list' %}">
+                            <div class="menu-item__inner">
+                                <img class="navbar-menu-icon {% if request.resolver_match.url_name == 'task_list' %}icon-active{% endif %}" src="{% static 'media/crm/navbar/tasks.png' %}"><span class="item_text">Задачи</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu_item">
+                        <a class="nav-link" href="#">
+                            <div class="menu-item__inner">
+                                <img class="navbar-menu-icon" src="{% static 'media/crm/navbar/clients.png' %}"><span class="item_text">Клиенты</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu_item">
+                        <a class="nav-link" href="#">
+                            <div class="menu-item__inner">
+                                <img class="navbar-menu-icon" src="{% static 'media/crm/navbar/reports.png' %}"><span class="item_text">Отчеты</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+        <div class="logout__wrapper">
+            <a class="logout-linked" href="{% url 'logout' %}">
+                <div class="logout">
+                    <img alt="logout" class="logout-icon" src="{% static 'media/crm/navbar/logout.svg' %}"> <span class="logout-text">Выйти</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

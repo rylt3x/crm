@@ -1,0 +1,339 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #221f2f;
+    flex-direction: column-reverse;
+    overflow: hidden;
+    height: 100vh;
+}
+li {
+    pointer-events: all;
+}
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul.lead-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+li.lead-menu-item {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0;
+    position: relative;
+}
+
+.delete-menu {
+    position: absolute;
+    top: 4px;
+    left: 68px;
+    list-style-type: none;
+    transition: .2s;
+    width: 120px;
+    text-align: center;
+    padding: 7px 0;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 3;
+    background-color: rgb(79, 72, 110);
+    /*background-color: #eeeeee;*/
+}
+
+.delete-arrow-left {
+    height: 0;
+    width: 0;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-right: 17px solid rgb(79, 72, 110);
+    position: absolute;
+    top: 1px;
+    left: -17px;
+}
+
+.delete-menu.menu-enabled{
+    visibility: visible;
+    opacity: 1;
+}
+
+.delete-menu__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.delete-menu-item a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 5px;
+}
+.delete-icon {
+    height: 20px;
+    filter: invert(22%) sepia(100%) saturate(7351%) hue-rotate(8deg) brightness(116%) contrast(130%);
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+}
+
+/* Dashboard*/
+
+.dashboard-header__wrapper {
+    width: auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100px;
+    margin: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px #797979 dashed;
+}
+h1 {
+    display: inline-block;
+    font-size: 3.5em;
+    margin: 0;
+}
+.date-and-time {
+    display: inline-block;
+    font-size: 1.4em;
+}
+
+.content {
+    overflow-y: auto;
+    width: 100%;
+    color: white;
+}
+.content__inner{
+    display: flex;
+}
+.dashboard__wrapper {
+    margin-left: 70px;
+    margin-top: 100px;
+    margin-right: 100px;
+    display: block;
+    width: 100%;
+
+}
+.dashboard {
+    font-family: "Open Sans", sans-serif;
+}
+
+#main-info{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.info-element__wrapper{
+    display: inline-flex;
+    align-items: center;
+    width: 33.33%;
+    height: 128px;
+    background-color: #3C394B;
+    transition: .2s;
+
+    border-radius: 10px;
+    margin: 25px;
+    box-shadow: rgba(0, 0, 0, .3) 5px 5px 15px;
+}
+
+.info-element {
+    padding: 5px;
+    margin-left: 20px;
+    text-align: left;
+}
+.info-header {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+.info-text {
+    font-size: 1.8em;
+    color: #4ac1f7;
+}
+.head-section {
+    max-width: 1120px;
+}
+
+
+/* Добавить сделку */
+.create-order__inner {
+    margin: 25px 25px 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px #797979 dashed;
+}
+.create-order-element {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    transition: .2s;
+}
+.create-order-element:hover{
+    top: -5px;
+}
+
+.btn-background {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    background: #28b5ee;
+    padding: 9px;
+    margin-right: 10px;
+}
+
+.create-order-btn {
+    height: 25px;
+    filter: invert(100%);
+}
+.create-order-text {
+    display: block;
+    font-size: 1.2em;
+}
+.create-order-sub-text {
+    color: #a7a7a7;
+}
+
+/* Сделки */
+
+#leads {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+
+.lead-card__wrapper {
+    display: inline-flex;
+    width: 310px;
+    align-items: center;
+    height: max-content;
+    background-color: rgba(60, 57, 75, 1);
+    transition: .2s;
+    position: relative;
+    top: 0;
+
+    border-radius: 10px;
+    margin: 17px;
+    box-shadow: rgba(0, 0, 0, .3) 5px 5px 15px;
+    border-bottom: 3px solid #4ac1f7;
+}
+
+.lead-card__wrapper:hover {
+    top: -5px;
+    background-color: rgba(60, 57, 75, .85);
+}
+
+.lead-data {
+    padding: 5px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.title-and-menu {
+    display: flex;
+    justify-content: space-between;
+}
+.title-and-menu__wrapper {
+    max-width: 270px;
+}
+
+.lead-card{
+    width: 100%;
+    padding: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.avatar-section {
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 3px;
+}
+.avatar {
+    border-radius: 50%;
+    background-color: #514d72;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 17px;
+    margin-right: 10px;
+    color: #4ac1f7;
+    font-size: 1em;
+    height: 14px;
+    width: 14px;
+}
+.lead-card-header {
+    font-family: Montserrat, sans-serif;
+    text-overflow: ellipsis;
+    font-size: .9em;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 10px 0 0;
+    text-align: left;
+    display: inline-block;
+    width: 70%;
+    padding-bottom: 15px;
+    padding-top: 5px;
+    transition: .2s;
+}
+.lead-card-header:hover {
+    cursor: pointer;
+    color: #4ac1f7;
+}
+.client-contact {
+    display: inline-block;
+    margin-left: 10px;
+
+}
+.client-name {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    font-size: 1em;
+    max-width: 200px;
+}
+.client-phone {
+    display: block;
+    font-size: .8em;
+    color: #cccccc;
+}
+.client-task {
+    margin-bottom: 10px;
+}
+.data-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 35px;
+}
+.budget-text {
+    font-size: .9em;
+    margin-bottom: 5px;
+}
+.budget-value {
+    font-size: 1.7em;
+    color: #4ac1f7;
+    font-weight: 500;
+}
+.lead-content {
+    margin-bottom: 5px;
+}

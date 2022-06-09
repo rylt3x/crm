@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap5 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM - Задачи</title>
+
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/main_page.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/task_list.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/header_panel.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static '/vendor/data_tables/datatables.js' %}"></script>
+    <script type="text/javascript" src="{% static '/crm/js/send_email.js' %}"></script>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'crm/navigation.html' %}
+<section class="content">
+    {% include 'crm/header_panel.html' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 table-section">
+                <div class="col-12 mx-auto mx-table">
+                {% if not tasks %}
+                     <h2>Список задач пуст</h2>
+                {% else %}
+                    <h2>Список задач</h2>
+                    <table id="table-leads" class="table leads-table table-hover">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Задача</th>
+                            <th>Срок выполнения</th>
+                            <th>Сделка</th>
+                            <th>Последнее изменение</th>
+                            <th>Дата создания</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        {% for task in tasks %}
+                            <tr class="table-data {% if forloop.counter0|divisibleby:2 %} odd-item {% endif %}">
+                                <td><a class="lead-id" href="{% url 'crm:update_order' pk=task.to_lead.id %}">{{ task.name }}</a></td>
+                                <td class="{% if task.check_if_overdued == True %}overdued-task{% elif task.check_if_overdued == False %} todo-task {% endif %}">{{ task.deadline|default_if_none:"Не указан" }}</td>
+                                <td>{{ task.to_lead.get_lead_name }}</td>
+                                <td>{{ task.modified_at }}</td>
+                                <td>{{ task.created_at }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+</body>
+</html>

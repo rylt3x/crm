@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновление сделки</title>
+    <link rel="stylesheet" href="{% static 'crm/css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/update_order.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/header_panel.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="{% static 'crm/libs/imask/imask.js' %}"></script>
+    <script src="{% static 'crm/js/update_order.js' %}"></script>
+    <script type="text/javascript" src="{% static '/crm/js/send_email.js' %}"></script>
+</head>
+<body>
+<div class="wrapper">
+    {% include 'crm/navigation.html' %}
+    <section class="lead-data-section">
+        <form action="" method="post" id="lead-form" class="lead-data__wrapper">
+            {% csrf_token %}
+            <div class="lead-container">
+                <div class="row">
+                    <div class="row__inner">
+                        <div>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="client-section">
+                <div class="client-data">
+                    <form class="client-form" action="" method="post" id="client-form">
+                    {{ client_form.as_p }}
+                    </form>
+                </div>
+            </div>
+        </form>
+        <div class="button-section">
+            <div class="button-section__inner">
+                <button form="lead-form" class="save-order-btn" type="submit">Сохранить</button>
+            </div>
+        </div>
+    </section>
+    <section class="history__wrapper">
+        <div class="history-and-tasks">
+            <div class="history-section">ИСТОРИЯ ИЗМЕНЕНИЙ</div>
+
+            <div class="completed-tasks-section">
+                <div class="completed-task-list">
+                    {% for date, event_dates in lead_events.items %}
+
+                            <div class="event-date">
+                                <span class="event-date-text">
+                                    {% if date == "today_events" %}
+                                        Сегодня
+                                    {% else %}
+                                        {{ date }}
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                        {% for event in event_dates %}
+                            {% if event.event_type == "comment" %}
+                                <div class="lead-comment">
+                                    <div class="comment-date">
+                                        {{ event.created_at }}
+                                    </div>
+                                    <div class="comment-text">
+                                        {{ event.text }}
+                                    </div>
+                                </div>
+                            {% elif event.event_type == "task" %}
+                                <div class="completed-task-element">
+                                    <div class="c-task-icon filter-done-task">
+                                        <img height="35px" src="{% static 'media/crm/update_order/check.svg' %}" alt="completed">
+                                    </div>
+                                    <div class="name-and-deadline">
+                                        <div class="c-task-el c-task-name">
+                                            {{ event.name }}
+                                        </div>
+                                        <div class="c-task-el c-task-deadline">
+                                            {{ event.modified_at }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        <div class="set-task-block">
+            <div class="set-task-block__inner">
+                {% if lead_tasks %}
+                <div class="task-block">
+                    <div class="task-block__inner">
+                        {% for task in lead_tasks %}
+                            <div data-id="{{ task.id }}" class="task-item{% if task.check_if_overdued == True %} filter-overdue{% elif task.check_if_overdued == False %} filter-todo {% endif %}">
+
+                                <div class="task-element task-element-name">
+                                    <img class="task-icon" alt="task" src="{% static 'media/crm/update_order/check.svg' %}"> <span class="task-name-text">{{ task.name }}</span>
+                                </div>
+
+                                <div class="task-element task-element-deadline">
+                                    <span class="task-deadline-text">{{ task.deadline|default_if_none:"Срок не указан" }}</span>
+                                    <div class="task-buttons-section">
+                                        <button class="task-delete-btn" type="button">Удалить</button>
+                                        <button class="task-complete-btn" type="button">Выполнить</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+                <div class="task-form-section">
+                    <form id="task-form">
+                        <input type="hidden" name="to_lead" value="{{ lead.id }}">
+
+                        <div class="form-group task-or-comment__wrapper">
+                            <div class="task-or-comment__inner">
+                                <label class="task-or-comment-section">
+                                    <select class="task-or-comment-selector">
+                                        <option data-field-name="name" data-url="/api/v1/tasks/create" selected class="task-or-comment-option">Задача</option>
+                                        <option data-field-name="text" data-url="/api/v1/comment/create" class="task-or-comment-option">Комментарий</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="task-or-comment__inner">
+                                <label class="task-label deadline-label" for="id_task_deadline">Срок выполнения</label>
+                                <input type="datetime-local" id="id_task_deadline" name="deadline" class="task-input task-deadline">
+                            </div>
+                        </div>
+
+                        <label class="task-label name-label" for="id_task_name">Задача</label>
+                        <textarea autocomplete="off" id="id_task_name" name="name" class="task-input task-name"></textarea>
+
+                        <button id="create-task" type="button">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

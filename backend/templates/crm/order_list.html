@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap5 %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM - Сделки</title>
+
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/main_page.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/order_list.css' %}">
+    <link rel="stylesheet" href="{% static 'crm/css/header_panel.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static '/vendor/data_tables/datatables.js' %}"></script>
+    <script type="text/javascript" src="{% static '/crm/js/send_email.js' %}"></script>
+
+</head>
+<body>
+<div class="wrapper">
+    {% include 'crm/navigation.html' %}
+<section class="content">
+    {% include 'crm/header_panel.html' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 table-section">
+                <div class="col-12 mx-auto mx-table">
+                <h2>Список заявок</h2>
+                    <table id="table-leads" class="table leads-table table-hover">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Id</th>
+                            <th>Название</th>
+                            <th>Бюджет</th>
+                            <th>Этап</th>
+                            <th>Имя клиента</th>
+                            <th>Телефон</th>
+                            <th>Email</th>
+                            <th>Последнее изменение</th>
+                            <th>Дата создания</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        {% for lead in leads %}
+                            <tr class="table-data {% if forloop.counter0|divisibleby:2 %} odd-item {% endif %}">
+                                <td><a class="lead-id" href="{% url 'crm:update_order' pk=lead.pk %}">{{ lead.id }}</a></td>
+                                <td class="list-lead-name">{{ lead.name }}</td>
+                                <td>{{ lead.get_separated_budget }}</td>
+                                <td>{{ lead.stage.stage_name }}</td>
+                                <td>{{ lead.client.client_name }}</td>
+                                <td>{{ lead.client.pretty_phone }}</td>
+                                <td>{{ lead.client.client_email|default:'Не указан' }}</td>
+                                <td>{{ lead.modified_at }}</td>
+                                <td>{{ lead.created_at }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $('#table-leads').DataTable({
+            language: {
+                search: 'Фильтр:',
+                zeroRecords: "Ничего не найдено",
+                processing: "Загрузка...",
+                paginate: {
+                        first: '«',
+                        previous: '‹',
+                        next: '›',
+                        last: '»'
+                    },
+            },
+            pageLength: 15,
+            lengthChange: false
+
+        });
+    });
+</script>

@@ -1,0 +1,30 @@
+{% load static %}
+<section class="create-mail-section">
+    <div class="mail-modal">
+        <div class="send-mail-header">
+            <h3>Новое сообщение</h3>
+            <button type="button" id="close-mail-btn" class="btn-close"></button>
+        </div>
+
+        <div class="modal-ui">
+            <form method="post" action="" id="sendmail-form">
+                <div class="send-to">
+                    <label for="id_send_to" class="mail-label send-to-label">Кому:</label>
+                    <input type="text" autocomplete="off" name="receiver" class="mail-input" id="id_send_to">
+                </div>
+                <div class="subject">
+                    <label for="id_subject" class="mail-label subject-label">Тема:</label>
+                    <input autocomplete="off" type="text" name="subject" class="mail-input" id="id_subject">
+                </div>
+                <div class="mail-text">
+                    <label for="id_mail_text" class="mail-label mail_text-label">Текст:</label>
+                    <textarea autocomplete="off" type="text" name="mail_text" class="mail-input" id="id_mail_text"></textarea>
+                </div>
+                <div class="send-mail-btn">
+                    <button type="button" id="send-mail-btn" class="btn-send">Отправить</button>
+                    <img class="ajax-loader" src="{% static 'media/crm/ajax_loader.svg' %}">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
